@@ -1,5 +1,7 @@
 from datetime import datetime
 import json
+
+
 def load_data():
     with open("data/assistant_data.json", "r") as file:
         return json.load(file)
@@ -8,6 +10,8 @@ def load_data():
 def save_data(data):
     with open("data/assistant_data.json", "w") as file:
         json.dump(data, file, indent=4)
+
+
 def perceive(user_input):
     """Understand what the user wants."""
     return user_input.lower().strip()
@@ -15,22 +19,35 @@ def perceive(user_input):
 
 def decide(user_input):
     """Decide which action to perform."""
+
     if "hello" in user_input or "hi" in user_input:
         return "greeting"
+
     elif "time" in user_input or "date" in user_input:
         return "datetime"
+
     elif "add note" in user_input:
         return "add_note"
+
     elif "show notes" in user_input or "view notes" in user_input:
         return "view_notes"
+
+    elif "add reminder" in user_input:
+        return "add_reminder"
+
+    elif "show reminders" in user_input or "view reminders" in user_input:
+        return "view_reminders"
+
     elif "calculate" in user_input:
         return "calculator"
+
     else:
         return "unknown"
 
 
 def act(intent):
     """Perform the selected action."""
+
     if intent == "greeting":
         return "Hello! How can I help you?"
 
@@ -66,8 +83,30 @@ def act(intent):
             f"{i + 1}. {note}" for i, note in enumerate(data["notes"])
         )
 
+    elif intent == "add_reminder":
+        reminder = input("Enter your reminder: ")
+
+        data = load_data()
+        data["reminders"].append(reminder)
+        save_data(data)
+
+        return "Reminder saved successfully."
+
+    elif intent == "view_reminders":
+        data = load_data()
+
+        if not data["reminders"]:
+            return "You have no saved reminders."
+
+        return "Your reminders:\n" + "\n".join(
+            f"{i + 1}. {reminder}"
+            for i, reminder in enumerate(data["reminders"])
+        )
+
     else:
         return "Sorry, I don't understand that request."
+
+
 def run_agent():
     print("Smart Personal Assistant")
     print("Type 'exit' to stop.")

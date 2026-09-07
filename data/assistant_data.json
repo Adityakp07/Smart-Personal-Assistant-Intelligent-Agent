@@ -1,7 +1,12 @@
 {
     "notes": [
         "Finish AI assignment",
-        "asdf"
+        "asdf",
+        "Test note"
     ],
-    "reminders": []
+    "reminders": [
+        "sleep",
+        "Submit AI assignment tomorrow",
+        "test reminder"
+    ]
 }
