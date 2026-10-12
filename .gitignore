@@ -1,0 +1,9 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vscode/
+data/assistant_data.json
+docs/report_pages-*.png
+docs/tmp/

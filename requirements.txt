@@ -1,1 +1,2 @@
 pytest
+reportlab>=4.0
