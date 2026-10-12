@@ -5,7 +5,7 @@ A small Python command-line assistant that applies the **Perceive -> Decide -> A
 ## Features
 
 - Greeting, date/time, safe arithmetic, and small built-in information lookup.
-- Add and view notes; add and view reminders and meetings. Data persists in `data/assistant_data.json`.
+- Add and view notes; add and view reminders and meetings. Data persists locally in `data/assistant_data.json`, which is created when the assistant first saves data and is excluded from Git to keep personal data out of the repository.
 - `plan my day` assigns tasks to 30-minute time slots between 09:00 and 17:00, leaving 12:00-13:00 free. It respects task durations, earliest times, deadlines, fixed start times, and no-overlap constraints.
 - Day planning uses backtracking with forward checking and AC-3. The comparison command runs plain backtracking and the enhanced solver on three increasing task sets.
 - Rule-based intent recognition reports confidence; low-confidence requests trigger a clarification and are logged in the JSON file.
@@ -49,7 +49,7 @@ You: add reminder: finish lab; duration 60; deadline 16:00
 You: plan my day
 Assistant: Your day plan (work hours 09:00-17:00; break 12:00-13:00):
 Project review: 09:30-10:30
-finish lab: 09:00-10:00
+finish lab: 10:30-11:30
 ...
 You: why did you do that?
 Assistant: Decision explanation:
@@ -122,8 +122,8 @@ src/main.py       CLI, intent confidence, slot filling and actions
 src/planner.py    CSP domains, backtracking, forward checking and AC-3
 src/knowledge.py  explicit rules and forward-chaining inference
 tests/            Phase-1 intent tests
-data/             persistent JSON state
-docs/             report and screenshots
+data/             local persistent JSON state (created at runtime; not tracked)
+docs/             project report (Markdown and PDF) and report builder
 ```
 
 ## Limitations and responsible use
